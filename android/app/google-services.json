@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1061150999344",
+    "project_id": "instagram221201",
+    "storage_bucket": "instagram221201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061150999344:android:2219c9c8a1af3a687bbef5",
+        "android_client_info": {
+          "package_name": "com.example.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061150999344-u5ch45dlbpntaqc8umn159dlov9pdp01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4O7zMCpU8LOg4nUBaimRZNI0zB_TqCuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061150999344-u5ch45dlbpntaqc8umn159dlov9pdp01.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061150999344-l3kitftkktooje3pcm4a663stasdc2vp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.soda1127.instaframclon"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061150999344:android:500e565fceb94ac27bbef5",
+        "android_client_info": {
+          "package_name": "com.soda1127.instaframclon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061150999344-u5ch45dlbpntaqc8umn159dlov9pdp01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4O7zMCpU8LOg4nUBaimRZNI0zB_TqCuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061150999344-u5ch45dlbpntaqc8umn159dlov9pdp01.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061150999344-l3kitftkktooje3pcm4a663stasdc2vp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.soda1127.instaframclon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
