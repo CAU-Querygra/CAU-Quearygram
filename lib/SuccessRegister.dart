@@ -13,8 +13,9 @@ class SuccessRegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset('assets/images/logo_7.png', height: 150, width: 150),
             const Text(
-              "You have successfully registered.",
+              "회원가입이 성공적으로 완료되었습니다.",
               style: TextStyle(
                 fontSize: 20,
               ),
