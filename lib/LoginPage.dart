@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
-import 'package:instagram/Session.dart';
+import 'provider_data.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -94,10 +94,9 @@ class _LoginFormState extends State<LoginForm> {
                                 throw Exception('Does not exists');
                               }
                               final username = snapshot.data()!['name'];
-                              context.read<Session>().setUser(currentUser.user!.uid, username.toString());
-                              print(context.watch<Session>().name);
                               if (!mounted) return;
                               setState(() {
+                                context.read<UserData>().set_user_data(currentUser.user!.uid, username.toString(), email);
                                 showSpinner = false;
                               });
                             }
