@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,11 +43,40 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAd9iWspyicM-JFt50k63LB7hu4xW22NPo',
+    appId: '1:1061150999344:web:9a51cd5396f38b387bbef5',
+    messagingSenderId: '1061150999344',
+    projectId: 'instagram221201',
+    authDomain: 'instagram221201.firebaseapp.com',
+    storageBucket: 'instagram221201.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC4O7zMCpU8LOg4nUBaimRZNI0zB_TqCuw',
     appId: '1:1061150999344:android:2219c9c8a1af3a687bbef5',
     messagingSenderId: '1061150999344',
     projectId: 'instagram221201',
     storageBucket: 'instagram221201.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCHwMi0zPGh2F6_nuXFxIut3cVnGPq4Q00',
+    appId: '1:1061150999344:ios:06a32074080e32237bbef5',
+    messagingSenderId: '1061150999344',
+    projectId: 'instagram221201',
+    storageBucket: 'instagram221201.appspot.com',
+    iosClientId: '1061150999344-qdugi98nq7mdn69anu4vjanftc286aho.apps.googleusercontent.com',
+    iosBundleId: 'com.example.instagram',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCHwMi0zPGh2F6_nuXFxIut3cVnGPq4Q00',
+    appId: '1:1061150999344:ios:06a32074080e32237bbef5',
+    messagingSenderId: '1061150999344',
+    projectId: 'instagram221201',
+    storageBucket: 'instagram221201.appspot.com',
+    iosClientId: '1061150999344-qdugi98nq7mdn69anu4vjanftc286aho.apps.googleusercontent.com',
+    iosBundleId: 'com.example.instagram',
   );
 }
