@@ -1,11 +1,12 @@
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'provider_data.dart';
+
 
 class CreatePage extends StatefulWidget {
 
@@ -14,98 +15,120 @@ class CreatePage extends StatefulWidget {
   CreatePage(this.user);
 
   @override
-  _CreatePageState createState() => _CreatePageState();
+  State<CreatePage> createState() => _CreatePageState();
 }
 
 class _CreatePageState extends State<CreatePage> {
-  final textEditingController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
-/*
-  File _image;
+  final titleEditingController = TextEditingController();
+  final contentEditingController = TextEditingController();
+
+  File? _image;
 
   @override
   void dispose() {
-    textEditingController.dispose();
+    titleEditingController.dispose();
+    contentEditingController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: buildBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _getImage,
-        tooltip: '_getImage',
-        child: Icon(Icons.add_a_photo),
-      ),
-    );
-  }
+      appBar: AppBar(
+        title: Text('Add Question'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.upload),
+              onPressed: () async {
 
-  Widget _buildAppBar() {
-    return AppBar(
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.send), onPressed: () {
-          final firebaseStorageRef = FirebaseStorage.instance
-              .ref()
-              .child('post')
-              .child('${DateTime.now().millisecondsSinceEpoch}.png');
+                if (titleEditingController.text == '' && contentEditingController.text == '')
+                  return;
 
-          final task =  firebaseStorageRef.putFile(
-              _image, StorageMetadata(contentType: 'image/png')
-          );
+                final user_id = context.read<UserData>().id;
 
-          task.onComplete.then((value) {
-            var downloadUrl = value.ref.getDownloadURL();
-            downloadUrl.then((uri) {
-              var doc = FirebaseFirestore.instance.collection('post').document();
-              doc.setData({
-                'id': doc.documentID,
-                'photoUrl': uri.toString(),
-                'contents': textEditingController.text,
-                'email': widget.user?.email,
-                'displayName': widget.user?.displayName,
-                'userPhotoUrl': widget.user?.photoURL
-              }).then((value) {
-                Navigator.pop(context);
-              });
-            });
-          });
+                TaskSnapshot task = await FirebaseStorage.instance.ref()
+                    .child('question_images').child(
+                    user_id + titleEditingController.text).putFile(_image!);
 
-        },
-        )
-      ],
-    );
-  }
+                if (task != null) {
+                  var downloadUrl = await task.ref.getDownloadURL();
 
-  Widget buildBody() {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              _image == null ? Text('No Image') : Image.file(_image),
-              TextField(
-                decoration: InputDecoration(hintText: '내용을 입력하세요'),
-                controller: textEditingController,
-              )
-            ],
+                  FirebaseFirestore.instance.collection('Question').add({
+                    'author': user_id,
+                    'title' : titleEditingController.text,
+                    'commenting': contentEditingController.text,
+                    'image_url':downloadUrl.toString(),
+                    'timestamp': Timestamp.now(),
+                    'comments': <String>[],
+                  }).then((onValue) {
+                    Navigator.pop(context);
+                  });
+
+                }
+              }
           ),
         ],
       ),
+      body: SingleChildScrollView (
+        child: Column(
+          children: [
+            Center(
+                child: _image == null ? Column(
+                  children: [
+                    SizedBox(height: 20,),
+                    Image(image: AssetImage('assets/images/no_image.png'),height: 200,),
+                    SizedBox(height: 20,),
+                    Text('No image'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.add_a_photo),
+                          onPressed: () async {
+                            var image = await ImagePicker().pickImage(source: ImageSource.camera);
+                            setState(() {
+                              _image = File(image!.path);
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add_photo_alternate),
+                          onPressed: () async {
+                            var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                            setState(() {
+                              _image = File(image!.path);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+                    : Image.file(_image!)),
+            SizedBox(height: 10,),
+            TextField(
+              controller: titleEditingController,
+              decoration: InputDecoration(hintText: 'Enter the title',border: OutlineInputBorder(borderRadius: BorderRadius.circular(0.5),)),
+            ),
+            SizedBox(height: 5,),
+            TextField(
+              maxLines: 10,
+              controller: contentEditingController,
+              decoration: InputDecoration(hintText: 'Enter the content',border: OutlineInputBorder(borderRadius: BorderRadius.circular(0.5),)),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.refresh),
+        tooltip: 'Refresh image',
+        onPressed: (){
+          setState(() {
+            _image = null;
+          });
+        },
+      ),
     );
   }
-
-  _getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = image;
-    });
-  }
-}*/
+}
