@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/CreatePage.dart';
-import 'package:instagram/DetailPostPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:instagram/provider_data.dart';
 
 class SearchPage extends StatefulWidget {
   final User? user;
@@ -56,7 +57,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget _buildListItem(BuildContext context, document) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(document),));
+        final uid = context.read<UserData>().user;
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePage(uid),));
       },
       child: Image.network(
         document['photoUrl'],
