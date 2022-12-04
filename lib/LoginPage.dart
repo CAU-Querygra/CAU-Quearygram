@@ -96,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                               final username = snapshot.data()!['name'];
                               if (!mounted) return;
                               setState(() {
-                                context.read<UserData>().set_user_data(currentUser.user!.uid, username.toString(), email);
+                                context.read<UserData>().set_user_data(currentUser,currentUser.user!.uid, username.toString(), email);
                                 showSpinner = false;
                               });
                             }
