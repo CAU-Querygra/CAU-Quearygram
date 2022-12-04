@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram/AccountPage.dart';
 import 'package:instagram/HomePage.dart';
 import 'package:instagram/SearchPage.dart';
+import 'package:instagram/Detail.dart';
 
 class TabPage extends StatefulWidget {
 
@@ -22,7 +23,8 @@ class _TabPageState extends State<TabPage> {
   void initState() {
     super.initState();
     _pages = [
-      HomePage(widget.user),
+      //HomePage(widget.user),
+      Detail(),
       SearchPage(widget.user),
       AccountPage(widget.user),
     ];
