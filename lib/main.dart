@@ -1,6 +1,4 @@
 import 'package:instagram/LoginPage.dart';
-import 'package:instagram/RegisterPage.dart';
-import 'package:instagram/SuccessRegister.dart';
 import 'package:instagram/TabPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
           primaryColor: Colors.white,
