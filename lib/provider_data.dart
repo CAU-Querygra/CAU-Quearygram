@@ -18,7 +18,7 @@ class UserData with ChangeNotifier{
 }
 
 class LectureData with ChangeNotifier{
-  String lecture_id = '';
+  String lecture_id = 'Ag4HPBcwMp1sE94XwfDe';
   String question_id = 'rrfAI0l62W2AqAcBUPn6';
 
   set_lecture_id(lecture_id){

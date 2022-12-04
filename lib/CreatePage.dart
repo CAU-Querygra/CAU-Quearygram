@@ -46,6 +46,7 @@ class _CreatePageState extends State<CreatePage> {
                   return;
 
                 final user_id = context.read<UserData>().id;
+                final class_id = context.read<LectureData>().lecture_id;
 
                 TaskSnapshot task = await FirebaseStorage.instance.ref()
                     .child('question_images').child(
@@ -61,10 +62,10 @@ class _CreatePageState extends State<CreatePage> {
                     'image_url':downloadUrl.toString(),
                     'timestamp': Timestamp.now(),
                     'comments': <String>[],
+                    "class_id" :  class_id
                   }).then((onValue) {
                     Navigator.pop(context);
                   });
-
                 }
               }
           ),
