@@ -1,8 +1,10 @@
+import 'package:instagram/ClassList.dart';
 import 'package:instagram/LoginPage.dart';
 import 'package:instagram/TabPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/provider_data.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +43,8 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           final user = FirebaseAuth.instance.currentUser;
           if (snapshot.hasData) {
-            context
-                .read<UserData>()
-                .set_user_data(user, user!.uid, user.displayName, user.email);
-            return TabPage(snapshot.data);
+            context.read<UserData>().set_user_data(user,user!.uid, user.displayName.toString(), user.email);
+            return ClassList();
           } else {
             return const LoginPage();
           }
