@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/CreatePage.dart';
@@ -67,3 +68,4 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+*/
