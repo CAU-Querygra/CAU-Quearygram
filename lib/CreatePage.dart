@@ -39,7 +39,7 @@ class _CreatePageState extends State<CreatePage> {
               icon: Icon(Icons.upload),
               onPressed: () async {
 
-                if (titleEditingController.text == '' && contentEditingController.text == '')
+                if (titleEditingController.text == '' && contentEditingController.text == '' && _image == null)
                   return;
 
                 final user_id = context.read<UserData>().id;
