@@ -9,10 +9,7 @@ import 'provider_data.dart';
 
 
 class CreatePage extends StatefulWidget {
-
-  final User? user;
-
-  CreatePage(this.user);
+  const CreatePage({super.key});
 
   @override
   State<CreatePage> createState() => _CreatePageState();
