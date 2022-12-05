@@ -22,6 +22,16 @@ class _ClassListState extends State<ClassList> {
       appBar: AppBar(
         title: const Text('Instagram',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+            ),
+            onPressed: () {
+              signOutWithGoogle();
+            },
+          )
+        ],
       ),
       body: _buildBody(),
     );
@@ -74,7 +84,7 @@ Widget _buildListItem(BuildContext context, document) {
     0xAAB7A09A,
     0xDBB74A93,
   ];
-  Random random = new Random();
+  Random random = Random();
   return InkWell(
       onTap: () {
         context.read<LectureData>().set_lecture_id(document.id.toString());
@@ -99,14 +109,13 @@ Widget _buildListItem(BuildContext context, document) {
                     )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      child: Column(
+                  child: Column(
                     children: [
                       Row(
                         children: [
                           Text(
                             '${document['name']}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -115,16 +124,20 @@ Widget _buildListItem(BuildContext context, document) {
                         children: [
                           Text(
                             snapshot.data,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 13, fontWeight: FontWeight.w500),
                           ),
                         ],
                       )
                     ],
-                  )),
+                  ),
                 ),
               ]);
             }
             return const CircularProgressIndicator();
           }));
+}
+
+Future<void> signOutWithGoogle() async {
+  await FirebaseAuth.instance.signOut();
 }
