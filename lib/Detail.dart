@@ -282,7 +282,7 @@ class Comments extends StatefulWidget {
 
 class _CommentsState extends State<Comments> {
   String printTime(DateTime time) {
-    DateTime t = time.add(const Duration(hours: 9));
+    DateTime t = time;
     return "${t.year - 2000}년 ${t.month}월 ${t.day}일 ${t.hour}시 ${t.minute}분";
   }
 
