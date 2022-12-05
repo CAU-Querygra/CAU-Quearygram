@@ -2,6 +2,7 @@ import 'package:instagram/SuccessRegister.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -30,6 +31,7 @@ class _RegisterFormState extends State<RegisterForm> {
   String email = "";
   String password = "";
   String userName = "";
+  String className = "";
   
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
@@ -91,28 +93,36 @@ class _RegisterFormState extends State<RegisterForm> {
                 const Text("교수"),
               ],
             ),
+            if(_isProfessor)
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: '과목 이름',
+                ),
+                onChanged: (value) {
+                  className = value;
+                },
+              ),
             ElevatedButton(
                 onPressed: () async {
+                  String classId = generateRandomString(20);
                   try {
                     final newUser =
                     await _authentication.createUserWithEmailAndPassword(
                         email: email, password: password);
                     if (_isProfessor == true) {
                       await FirebaseFirestore.instance
+                          .collection('Class').doc(classId)
+                          .set ({
+                        'name': className,
+                        'professor_id': newUser.user!.uid
+                      });
+                      await FirebaseFirestore.instance
                           .collection('Professor')
                           .doc(newUser.user!.uid)
                           .set({
                         'name': userName,
                         'email': email,
-                        'class': ['OHAVlQEHDV07USDCB8p4', 'Ag4HPBcwMp1sE94XwfDe']
-                      });
-                      ['OHAVlQEHDV07USDCB8p4', 'Ag4HPBcwMp1sE94XwfDe'].forEach((element) async {
-                        await FirebaseFirestore.instance
-                            .collection('Class')
-                            .doc(element)
-                        .set ({
-                          'professor_id': newUser.user!.uid
-                        });
+                        'class': classId
                       });
                     } else {
                       await FirebaseFirestore.instance
@@ -123,7 +133,6 @@ class _RegisterFormState extends State<RegisterForm> {
                         'email': email,
                       });
                     }
-
 
                     if (newUser.user != null) {
                       _formekey.currentState!.reset();
@@ -158,4 +167,14 @@ class _RegisterFormState extends State<RegisterForm> {
       ),
     );
   }
+}
+
+String generateRandomString(int length) {
+  final random = Random();
+  const availableChars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final randomString = List.generate(length,
+          (index) => availableChars[random.nextInt(availableChars.length)])
+      .join();
+  return randomString;
 }
