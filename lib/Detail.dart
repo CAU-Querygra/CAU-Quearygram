@@ -10,6 +10,7 @@ import 'dart:math';
 
 class Detail extends StatelessWidget {
   const Detail({super.key});
+
   @override
   //AppBar 구현
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class Detail extends StatelessWidget {
 //DetailedPage: 페이지 구조/레이아웃 생성
 class DetailedPage extends StatefulWidget {
   const DetailedPage({super.key});
+
   @override
   State<DetailedPage> createState() => _DetailedPage();
 }
@@ -69,7 +71,9 @@ class _DetailedPage extends State<DetailedPage> {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black)),
                         child: Image.network(
-                          img,
+                          img == ''
+                              ? 'https://s3.orbi.kr/data/file/united/2f0143587553c051ebf38dd831c5edc3.png'
+                              : img,
                           fit: BoxFit.cover,
                         ),
                       ), // @@@이미지파일 표시
@@ -152,6 +156,7 @@ class _DetailedPage extends State<DetailedPage> {
 class StudentName extends StatefulWidget {
   final bool option;
   final String author;
+
   const StudentName(this.author, this.option, {super.key});
 
   @override
@@ -203,6 +208,7 @@ class _StudentNameState extends State<StudentName> {
 class ProfName extends StatefulWidget {
   final bool option;
   final String author;
+
   const ProfName(this.author, this.option, {super.key});
 
   @override
@@ -253,7 +259,9 @@ class _ProfNameState extends State<ProfName> {
 
 class CommentsView extends StatefulWidget {
   final List comments;
+
   const CommentsView(this.comments, {super.key});
+
   @override
   State<CommentsView> createState() => _CommentsViewState();
 }
@@ -274,6 +282,7 @@ class _CommentsViewState extends State<CommentsView> {
 
 class Comments extends StatefulWidget {
   final String comments;
+
   const Comments(this.comments, {super.key});
 
   @override
@@ -338,6 +347,7 @@ class _CommentsState extends State<Comments> {
 
 class NewMessage extends StatefulWidget {
   final String question;
+
   const NewMessage(this.question, {super.key});
 
   @override
