@@ -72,17 +72,19 @@ Widget _buildListItem(BuildContext context, document) {
   }
 
   var colors = [
-    0xFFB74093,
+    0xFDB74093,
     0xBAB24093,
     0xEACA4093,
     0xABB74093,
     0xDFAC1542,
-    0xAFFFEA43,
+    0xAFCFEA43,
     0xCDA14021,
     0xFFB74093,
     0xCEBA4013,
     0xAAB7A09A,
     0xDBB74A93,
+    0x13ABCD65,
+    0x73D2AB24
   ];
   Random random = Random();
   return InkWell(
@@ -104,7 +106,7 @@ Widget _buildListItem(BuildContext context, document) {
                     child: SizedBox(
                       height: 70,
                       child: Container(
-                        color: Color(colors[random.nextInt(10)]),
+                        color: Color(colors[random.nextInt(13)]),
                       ),
                     )),
                 Padding(
