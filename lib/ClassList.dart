@@ -20,7 +20,7 @@ class _ClassListState extends State<ClassList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Instagram',
+        title: const Text('CAU Querygram',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: <Widget>[
           IconButton(
