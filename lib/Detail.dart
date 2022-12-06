@@ -230,7 +230,7 @@ class _ProfNameState extends State<ProfName> {
                 Expanded(
                   child: Text(
                     "작성자: ${snapshot.data!.data()!["name"].toString()} 교수",
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20, color: Colors.indigo),
                   ),
                 ),
                 Expanded(
@@ -244,7 +244,7 @@ class _ProfNameState extends State<ProfName> {
           } else {
             return Text(
               "${snapshot.data!.data()!["name"].toString()} 교수",
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.indigo),
             );
           }
         });
